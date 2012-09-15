@@ -1,0 +1,331 @@
+8/11/05
+------------
+Much work done as well as most forum posts addressed.
+0.9.00 pre 2 released.
+
+18/10/05
+------------
+0.9.00 pre released to testers.
+Much work done on audit.vbs and admin_add_pc_new*.php - no longer need MyODBC installed. Audit.vbs outputs to admin_add_pc_new.php -> this is submitted to admin_add_pc_new_2.php which contains all the logic for inserting & updating the DB. NO logic is now in audit.vbs.
+
+
+03/09/05
+------------
+Added alternative icon set - Win (guess where they're from).
+
+26/08/05
+------------
+Changed css, expanding the main pages works MUCH better now.
+Have to apply this to ALL pages, though - it may take a little while.
+
+
+24/08/05
+------------
+Added ability to theme the interface - see include_col_scheme.php
+Added alternative icon set - nuoveXT from kde-look.org
+
+
+18/08/05
+------------
+Fixed spelling mistake in system_security_bullitens (should be bulletins) table + pages
+Tested against our domain - seems to detect multiple NICs & monitors correctly
+Altered nmap.vbs to account for uuid instead of mac on PCs
+Altered nmap.vbs to show on screen when nothing at an IPAddress
+
+
+17/08/05
+------------
+Fixed audit.vbs where if auditing a machine with supplied credentials, partitons would not report correctly
+As above, fixed audit.vbs for monitor detection
+Cleaned up monitor detection
+Altered all tables to allow for enough characters in the linked mac address fields - now 100, for use by system_uuid
+
+
+15/08/05
+------------
+Updated the projects homepage.
+Started language translation
+
+
+12/08/05
+------------
+Added monitor detect script from the forums - thank-you Mancha
+Had to alter the database - added a monitor table, and removed the monitor details from system table.
+Seems to work fine for all our systems, except one laptop (an IBM Thinkpad 28818PM).
+
+
+11/08/05
+------------
+Fixed two bugs in setup.php (missing ;)
+
+
+10/08/05
+------------
+Added ability to sort by columns on List Software page
+Fixed bug - version not displaying as 0.8.04
+Fixed bug - javascript counter in include.php
+Added "Date Detected' into other table when audit.vbs detects printers & monitors
+
+
+09/08/05
+------------
+0.8.04 released
+Changed total memory to accurately reflect 64/128/256/512 etc, etc
+
+
+01/8/05
+------------
+Added system_uuid field from audit.vbs into system table
+
+
+29/7/05
+------------
+Added different icons for different USB devices listed on System -> Hardware page
+Filtered shown USB devices on System -> Hardware page
+   Removed: "(Standard system devices)" & "HID-compliant consumer control device"
+
+
+21/7/05
+------------
+Altered some fonts to Trebuchet (headings mainly)
+Changed index.php to expanding sections
+Changed index.php to show only section with results (count > 0)
+Added "Updates" section under system software
+Fixed Updates displaying under Software Detected section on index.php
+Added Web Servers & FTP Servers detected on index.php
+Created include_ip_trans to remove leading 0's from IP Addresses with the function ip_trans($ip)
+Fixed software count in List All Software Page
+Changed Date Auditied column on Listing pages to only show date - not date + time.
+  To change back, see line 500
+Altered audit.vbs to enable online = "ie"
+  online = "ie" is mainly for running the script on individual PCs, but without having to install MyODBC
+  online = "ie" uses an instance of Internet Explorer (not shown), and pipes the created SQL to a text box, then clicks the Submit button, then closes the instance
+  online = "ie" doesn't "talk" to the database (only to the text box in IE), so it cannot query the database
+  online = "ie" acts like an Offline audit (it cannot "update" software, only delete all software for a system, then add all detected software - see last point)
+  online = "ie" uses the page admin_pc_add_remote.php
+  online = "ie" can have the database username & password removed
+  online = "ie" audit.vbs with username & password removed could be places in the webroot & a link given to employees to click (and RUN the script, not save it)
+  online = "ie" could be emailed to employees (with instructions to run the script)
+  online = "ie" could be setup in login scripts
+  
+
+
+3/6/05
+------------
+Added OS input from audit.vbs to the software table - can now be used in software register
+Changed the hfnet section of audit.vbs to use a temp file, which is deleted after the function ends (like the nslookup function)
+
+2/6/05
+------------
+Many squashed bugs.
+0.8.03 released.
+
+
+24/05/05
+------------
+Have not kept this up to date - apologies.
+Some changes for 0.8.0.1 are:
+ - hfnetchk integration
+ - bug fixes
+ - audit.vbs fixes
+ - audit.vbs now detects 'chassis type', and laptops are classified as using this field
+ - buttons fixed for IE
+ - many other changes
+
+
+04/04/05
+------------
+DB - MANY database changes leading up to 0.8
+DB - All tables checked and MAC (linked) field changed to varchar(17)
+DB - All tables have indexes created (mac + id, some have others as well)
+DB - firewire table created
+DB - USB table created
+Web - USB Devices now under System | Hardware
+Web - Search page now lists all systems with name LIKE input
+DB changes for IE Browser Helper Objects
+Web - IE BHO's added under system | IE BHO's
+DB - Changes for AntiVirus
+Web - AV settings in System | Security working
+*** Note - AV still depends on AV Vendors updating WMI. Not all do.
+Script - audit.vbs fixed to detect USB printers & add to Other table
+
+
+
+18/03/05
+------------
+Bug fix release. 0.7.04
+Mainly fixes bugs in the web interface.
+
+28/2/05
+------------
+0.7 Released.
+Have been slack on the changelog - too busy coding.
+MANY changes.
+Software Register complete.
+Ability to add 'Other' items to groups.
+Interface redesign.
+Many bugs fixed.
+Much code cleanup / standardising.
+
+20/1/05
+------------
+Altered disk.vbs. Several options now. Similiar to audit.vbs
+ -> Audit Domain
+ -> Audit domain servers
+ -> Use file to audit system
+ -> manual prompt for a system
+Completed the Admin - WI Config page
+
+19/1/05
+------------
+Added new types to 'other' fields
+Add link to list all PCs with software from system software page
+Add PC Description to list PCs with software page
+Add sort columns to List Other page
+
+18/1/05
+------------
+Created script to use Nmap to probe a subnet, check if the detected MAC is present, and insert the device
+Added new types to 'other' fields
+
+14/1/05
+------------
+Fixed Edit link on system summary page + editing pages
+Added Hewlett Packard to the model link in list laptop page
+Altered disk.vbs to retrieve correct MAC Address (same as audit.vbs)
+Altered disk.vbs to provide a 'verbose' mode
+Altered the list laptop page to request systems with battery = 'Internal Battery' 
+   ---> to eliminate the UPs false positives
+Added functions to determine Windows OS types
+
+13/1/05
+------------
+Released 0.66
+
+7/1/05
+------------
+Added Firewall type to Other Equipment
+
+6/1/05
+------------
+Added Search for laptop type on manufacturer website
+
+5/1/05
+------------
+Released 0.65
+Changes to laptop listing display
+
+4/1/05
+------------
+Fixed bug in audit.vbs for determining if PC had been audited -> installed_applications
+Revised menu structure
+Released WI 0.63
+Bug fixed in list_software.php -> selected PC used mac instead of pc in URL
+Released 0.64
+Added List Laptops & List Workstations into menu.
+List Desktops now excludes any Laptop PCs.
+Fixed formatted timestamp in system_graph.php
+
+3/1/05
+------------
+Released WI 0.62
+Revised some filenames to reflect menu structure
+Revised index.php
+
+29/12/04
+------------
+Added fields to query.php pages
+Added code in audit.vbs to retrieve NT & 98 CD Keys
+
+21/12/04
+------------
+Added list_software.php to retrieve ALL installed software in the database
+  (This is the begining of the software licensing suite)
+
+6/12/04
+------------
+Initial work commenced on a 'setup' page for initial config
+
+24/11/2004
+------------
+Cleaned up audit.vbs
+Added MS CD Key detection & enumeration -> Software -> MS CD Keys
+
+19/11/2004
+------------
+PHP Pages linked by MAC Address -> not system_id
+Added Query -> All Desktops
+Fixed error in processor count in audit.vbs
+
+
+
+14/11/2004
+------------
+Audit.vbs uses external file for PCNames.
+Audit.vbs can audit PCs not on local domain.
+Audit.vbs can email a list of failed audits.
+XP SP2 firewall settings recorded (new tables in database).
+Security page created - firewall, antivirus.
+
+
+7/11/2004
+------------
+New audit.vbs incorporated.
+Removed the menu items for 'Actions' and 'Scheduled Tasks'.
+Created new table called system_man for the manual entries (price, location, etc). This will not be deleted when inventorying PCs (all the system tables data is now deleted each time a PC is inventoried).
+
+
+23/10/2004
+------------
+Multiple NICs
+Winventory 0.5 released.
+Script to audit a whole domain created.
+
+
+22/10/2004
+------------
+Changed audit.vbs so when using offline it automatically generates a text file computername.txt.
+Changed audit.vbs so when using verbose it outputs to screen the section it is auditing
+Changed audit.vbs so it skips the 'hotfixes' section if the PC is WinNT
+
+
+20/10/2004
+------------
+Enabled Groups in Main menu
+Altered audit.vbs so it is possible to specifiy another PC in the variable strcomputer & run the script remotely
+Tidied up summary, hardware, OS Settings, Services screens and code
+Removed script generation page (for now)
+Tidied up the Group listing page (new icons)
+
+
+19/10/2004
+------------
+Fixed software date when submitted in query_2.php
+Altered link in hotfixes in software.php to point directly to KB article at microsoft.com
+Enabled PCs in groups (both add & remove)
+
+
+15/10/2004
+------------
+Added manufacturer to 'other' items
+
+
+4/10/2004
+------------
+Added icons when listing 'Other' items.
+Added extra categories under 'Other' items (monitor, camera, scanner).
+Cleaned up Summary page.
+Add field other_linked_pc to other table.
+Added ability to associate 'Other' with a PC (changes to all other*.php pages).
+Added 'Other' section on PC Summary page.
+Added group_names table.
+Added group_members table.
+Added group pages for list, add, delete, edit. (group*.php)
+ 
+
+
+10/09/2004
+------------
+Windows Inventory 0.42 released.
+
+
